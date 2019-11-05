@@ -1,0 +1,23 @@
+name: git pull in server when push
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: pull from deloy target
+      uses: fifsky/ssh-action@master
+      with:
+        command: ~/web/lop.8oji.tokyo/pull_for_lolipop.bash
+        port: ${{ secrets.SSH_PORT }}
+        host: ${{ secrets.SSH_HOST }}
+        user: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.PRIVATE_KEY}}
