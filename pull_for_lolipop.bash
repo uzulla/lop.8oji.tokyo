@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
-git -c core.sshCommand="ssh -i ~/.ssh/hoge_deploy.key" \
-    --git-dir=${HOME}/web/lop.8oji.tokyo/.git \
-    --work-tree=${HOME}/web/lop.8oji.tokyo/ pull 
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+
+git \
+    --git-dir=${SCRIPT_DIR}/.git \
+    --work-tree=${SCRIPT_DIR} \
+    pull
+
+# need key settings in .ssh/config
+#
+# Host my.site.example.github.com
+#   Hostname github.com
+#   User git
+#   IdentityFile ~/.ssh/deploy.key
